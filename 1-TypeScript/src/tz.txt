@@ -1,0 +1,55 @@
+console.log("Hello Typescript");
+
+// const a = 10;
+
+//types of ts
+//number, string, boolean, undefined, null, object, any;
+
+//union
+let a: number | string | boolean = 10;
+a = true;
+
+let b: string = "Hello";
+const c: boolean = true;
+const d: undefined = undefined;
+const e: null = null;
+
+let f: any = 10;
+f = "Hello";
+f = true;
+
+// const obj = {
+//     a: 10,
+// };
+// console.log(obj.a);
+
+// console.log(b - 10); - NaN(not a number);
+
+-----------------------------------------------------------------------
+
+//optional chaining.- objectga type berish.
+const person: { name: string, age: number, from: string, username?: string } = {
+    name: "Mukhlis",
+    age: 15,
+    from: "Uzbekistan"
+};
+
+person.username = "Nabieva0003";
+console.log(person);
+
+------------------------------------------------------------------------
+ARRAY
+// const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// arr[0] = 20;
+// console.log(arr);
+
+//Arrayga type berish : prostoy variant
+// const arr: [number, string, boolean] = [1, "Hello", true];
+
+//agar faqat bitta type boledigon bolsa , masalan numberdan tashkil topgan array bolsa unda:
+// const arr: number[] = [1, 2, 33, 4, 5, 66, 77]; //-shu korinishda boladi
+
+//agar string va numberdan tashkil topgan array bolsa unda:
+// const arr: (number | string | boolean)[] = [1, 22, 3, "Hello"];
+// arr.push("Mukhlis"); arr.push(true) //-shu tarzda yozaman, bu birinchi usuli edi ikkinchi usuli:
+// const arr: Array<number | string> = [1, 2, 333, "Mukhlis"]; //- bu ikkinchi usuli.

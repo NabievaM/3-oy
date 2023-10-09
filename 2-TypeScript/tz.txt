@@ -1,0 +1,3 @@
+Interface ga class dan extends olsa boladi.
+Type dan meros olib bolmaydi.
+ Interface ga class dan extends olsa boladi.
