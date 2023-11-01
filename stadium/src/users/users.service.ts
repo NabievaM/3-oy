@@ -3,6 +3,7 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
+  ServiceUnavailableException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -25,6 +26,7 @@ import { Otp } from '../otp/model/otp.model';
 import { dates, decode, encode } from '../helpers/crypto';
 import { VerifyOtpDto } from './dto/verifyOtp.dto';
 import { AddMinutesToDate } from '../helpers/addMinutes';
+import { SmsService } from '../sms/sms.service';
 
 @Injectable()
 export class UsersService {
@@ -35,6 +37,7 @@ export class UsersService {
     @InjectModel(Otp) private readonly otpRepo: typeof Otp,
     private readonly mailService: MailService,
     private readonly botService: BotService,
+    private readonly smsService: SmsService,
   ) {}
 
   async getTokens(user: User) {
@@ -279,6 +282,14 @@ export class UsersService {
         HttpStatus.BAD_REQUEST,
       );
     }
+
+    const resp = await this.smsService.sendSms(phone_number.slice(1), otp);
+    if (resp.status !== 200)
+      throw new ServiceUnavailableException("Otp jo'natilmadi");
+    const message =
+      'Code has been send to *****' +
+      phone_number.slice(phone_number.length - 4);
+
     const now = new Date();
     const expiration_time = AddMinutesToDate(now, 5);
     await this.otpRepo.destroy({
@@ -300,7 +311,7 @@ export class UsersService {
     };
 
     const encoded = await encode(JSON.stringify(details));
-    return { status: 'Success', Details: encoded };
+    return { status: 'Success', Details: encoded, message };
   }
 
   async verifyOtp(verifyOtpDto: VerifyOtpDto) {

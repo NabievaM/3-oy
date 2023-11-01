@@ -8,6 +8,7 @@ import { MailModule } from 'src/mail/mail.module';
 import { BotModule } from 'src/bot/bot.module';
 import { Otp } from 'src/otp/model/otp.model';
 import { OtpModule } from 'src/otp/otp.module';
+import { SmsModule } from '../sms/sms.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { OtpModule } from 'src/otp/otp.module';
     MailModule,
     BotModule,
     OtpModule,
+    SmsModule,
   ],
   controllers: [UsersController],
   providers: [UsersService],

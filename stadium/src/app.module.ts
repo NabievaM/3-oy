@@ -32,7 +32,8 @@ import { StadiumTimesModule } from './stadium-times/stadium-times.module';
 import { Time } from './stadium-times/models/stadium-time.model';
 import { ComfortStadiumModule } from './comfort-stadium/comfort-stadium.module';
 import { ComfortStadium } from './comfort-stadium/models/comfort-stadium.model';
-import { StatusModule } from './status/status.module';
+import { OrderModule } from './order/order.module';
+import { SmsModule } from './sms/sms.module';
 
 @Module({
   imports: [
@@ -90,7 +91,8 @@ import { StatusModule } from './status/status.module';
     CommentsModule,
     StadiumTimesModule,
     ComfortStadiumModule,
-    StatusModule,
+    OrderModule,
+    SmsModule,
   ],
   controllers: [],
   providers: [],
